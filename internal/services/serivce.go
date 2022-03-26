@@ -52,7 +52,7 @@ func (s *Service) GetStatistic(ctx context.Context, country string) ([]models.Co
 			return nil, err
 		}
 
-		err = s.client.Set(ctx, queryString, bytes.NewBuffer(byteData).Bytes(), time.Hour*5).Err()
+		err = s.client.Set(ctx, queryString, bytes.NewBuffer(byteData).Bytes(), time.Hour*2).Err()
 		if err != nil {
 			return nil, err
 		}
