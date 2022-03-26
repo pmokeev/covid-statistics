@@ -1,17 +1,17 @@
-package router
+package routers
 
 import (
+	"github.com/pmokeev/covid-statistic/internal/controllers"
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/pmokeev/covid-statistic/internal/controller"
 )
 
 type Router struct {
-	controller *controller.Controller
+	controller *controllers.Controller
 }
 
-func NewRouter(controller *controller.Controller) *Router {
+func NewRouter(controller *controllers.Controller) *Router {
 	return &Router{controller: controller}
 }
 

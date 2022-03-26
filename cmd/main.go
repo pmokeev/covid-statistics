@@ -11,9 +11,9 @@ import (
 	"time"
 
 	"github.com/pmokeev/covid-statistic/internal"
-	"github.com/pmokeev/covid-statistic/internal/controller"
-	"github.com/pmokeev/covid-statistic/internal/router"
-	"github.com/pmokeev/covid-statistic/internal/service"
+	"github.com/pmokeev/covid-statistic/internal/controllers"
+	"github.com/pmokeev/covid-statistic/internal/routers"
+	"github.com/pmokeev/covid-statistic/internal/services"
 	"github.com/spf13/viper"
 )
 
@@ -28,9 +28,9 @@ func main() {
 		log.Fatalf("Error while init config %s", err.Error())
 	}
 
-	service := service.NewService()
-	controller := controller.NewController(service)
-	router := router.NewRouter(controller)
+	service := services.NewService()
+	controller := controllers.NewController(service)
+	router := routers.NewRouter(controller)
 	server := internal.NewServer()
 
 	go func() {

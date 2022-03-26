@@ -1,18 +1,17 @@
-package controller
+package controllers
 
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/pmokeev/covid-statistic/internal/services"
 	"net/http"
-
-	"github.com/pmokeev/covid-statistic/internal/service"
 )
 
 type Controller struct {
-	service *service.Service
+	service *services.Service
 }
 
-func NewController(service *service.Service) *Controller {
+func NewController(service *services.Service) *Controller {
 	return &Controller{service: service}
 }
 
