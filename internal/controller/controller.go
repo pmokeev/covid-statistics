@@ -1,9 +1,10 @@
 package controller
 
 import (
+	"encoding/json"
+	"fmt"
 	"net/http"
 
-	"github.com/gin-gonic/gin"
 	"github.com/pmokeev/covid-statistic/internal/service"
 )
 
@@ -15,17 +16,25 @@ func NewController(service *service.Service) *Controller {
 	return &Controller{service: service}
 }
 
-func (c *Controller) GetStatistic(context *gin.Context) {
-	country, status := context.GetQuery("country")
-	if !status {
-		context.AbortWithStatus(http.StatusBadRequest)
+func (c *Controller) GetStatistic(w http.ResponseWriter, r *http.Request) {
+	country := r.URL.Query().Get("country")
+	if country == "" {
+		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
 
-	statistic, err := c.service.GetStatistic(country)
+	statistic, err := c.service.GetStatistic(r.Context(), country)
 	if err != nil {
-		context.AbortWithStatus(http.StatusInternalServerError)
+		fmt.Println(err.Error())
+		w.WriteHeader(http.StatusInternalServerError)
+		return
 	}
 
-	context.JSON(http.StatusOK, statistic)
+	err = json.NewEncoder(w).Encode(statistic)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
 }

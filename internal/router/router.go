@@ -1,7 +1,9 @@
 package router
 
 import (
-	"github.com/gin-gonic/gin"
+	"net/http"
+
+	"github.com/gorilla/mux"
 	"github.com/pmokeev/covid-statistic/internal/controller"
 )
 
@@ -13,13 +15,10 @@ func NewRouter(controller *controller.Controller) *Router {
 	return &Router{controller: controller}
 }
 
-func (r *Router) InitRouter() *gin.Engine {
-	router := gin.New()
+func (r *Router) InitRouter() http.Handler {
+	router := mux.NewRouter()
 
-	api := router.Group("/api")
-	{
-		api.GET("/", r.controller.GetStatistic)
-	}
+	router.HandleFunc("/api/", r.controller.GetStatistic).Methods("GET")
 
 	return router
 }
