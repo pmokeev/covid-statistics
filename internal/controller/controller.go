@@ -16,5 +16,16 @@ func NewController(service *service.Service) *Controller {
 }
 
 func (c *Controller) GetStatistic(context *gin.Context) {
-	context.AbortWithStatus(http.StatusBadRequest)
+	country, status := context.GetQuery("country")
+	if !status {
+		context.AbortWithStatus(http.StatusBadRequest)
+		return
+	}
+
+	statistic, err := c.service.GetStatistic(country)
+	if err != nil {
+		context.AbortWithStatus(http.StatusInternalServerError)
+	}
+
+	context.JSON(http.StatusOK, statistic)
 }
