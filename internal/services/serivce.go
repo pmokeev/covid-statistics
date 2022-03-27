@@ -46,7 +46,21 @@ func (s *Service) GetStatistic(ctx context.Context, country string) ([]models.Co
 			return nil, err
 		}
 
-		byteData, err := json.Marshal(data)
+		refactoredData := make([]models.CovidDay, 0)
+		currentDay := data[0].Date
+		counterDay := 0
+		for _, value := range data {
+			if value.Date == currentDay {
+				counterDay += value.Cases
+			} else {
+				refactoredData = append(refactoredData, models.CovidDay{Cases: counterDay,
+					Date: currentDay})
+				counterDay = value.Cases
+				currentDay = value.Date
+			}
+		}
+
+		byteData, err := json.Marshal(refactoredData)
 		if err != nil {
 			return nil, err
 		}
@@ -56,7 +70,7 @@ func (s *Service) GetStatistic(ctx context.Context, country string) ([]models.Co
 			return nil, err
 		}
 
-		return data, nil
+		return refactoredData, nil
 	} else if err != nil {
 		return nil, err
 	} else {
