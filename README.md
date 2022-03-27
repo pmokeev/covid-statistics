@@ -1,4 +1,4 @@
-# COVID19 Statistic
+# COVID19 Statistics
 
 [![ci](https://github.com/pmokeev/covid-statistic/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/pmokeev/covid-statistic/actions/workflows/ci.yml)
 

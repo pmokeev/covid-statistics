@@ -1,4 +1,4 @@
-module github.com/pmokeev/covid-statistic
+module github.com/pmokeev/covid-statistics
 
 go 1.18
 
