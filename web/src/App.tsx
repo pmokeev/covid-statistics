@@ -39,12 +39,11 @@ function App() {
     const handleSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();
         
-        const response = await fetch('https://api.covid19api.com/country/'+countryName+'/status/confirmed?from=2020-03-01T00:00:00Z&to=2020-04-01T00:00:00Z', {
+        const response = await fetch('http://localhost:8000/api/?country='+countryName, {
             method: 'GET'
         })
         
         const responseJSON = await response.json();
-        
         if (response.status === 200) {
             let countryResponse = Array<{x: string; y: number}>();
             for (let i = 0; i < responseJSON.length; i++) {

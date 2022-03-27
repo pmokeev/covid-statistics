@@ -1,8 +1,10 @@
 package routers
 
 import (
-	"github.com/pmokeev/covid-statistic/internal/controllers"
 	"net/http"
+
+	"github.com/pmokeev/covid-statistic/internal/controllers"
+	"github.com/rs/cors"
 
 	"github.com/gorilla/mux"
 )
@@ -20,5 +22,15 @@ func (r *Router) InitRouter() http.Handler {
 
 	router.HandleFunc("/api/", r.controller.GetStatistic).Methods("GET")
 
-	return router
+	corsOpts := cors.New(cors.Options{
+		AllowedOrigins: []string{"http://localhost:3000"},
+		AllowedMethods: []string{
+			http.MethodGet,
+		},
+		AllowedHeaders: []string{
+			"*",
+		},
+	})
+
+	return corsOpts.Handler(router)
 }

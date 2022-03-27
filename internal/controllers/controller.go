@@ -2,9 +2,9 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
-	"github.com/pmokeev/covid-statistic/internal/services"
 	"net/http"
+
+	"github.com/pmokeev/covid-statistic/internal/services"
 )
 
 type Controller struct {
@@ -24,7 +24,6 @@ func (c *Controller) GetStatistic(w http.ResponseWriter, r *http.Request) {
 
 	statistic, err := c.service.GetStatistic(r.Context(), country)
 	if err != nil {
-		fmt.Println(err.Error())
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}

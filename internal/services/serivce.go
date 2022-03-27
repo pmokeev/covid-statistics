@@ -29,11 +29,10 @@ func (s *Service) GetStatistic(ctx context.Context, country string) ([]models.Co
 	queryString := "https://api.covid19api.com/country/%s/status/confirmed?from=%s&to=%s"
 
 	currentTime := time.Now()
-	endDate := currentTime.Format("02-01-2006")
-	startDate := currentTime.AddDate(0, -1, 0).Format("02-01-2006")
+	endDate := currentTime.Format("2006-01-02")
+	startDate := currentTime.AddDate(0, -1, 0).Format("2006-01-02")
 
 	queryString = fmt.Sprintf(queryString, country, startDate, endDate)
-
 	value, err := s.client.Get(ctx, queryString).Result()
 	if err == redis.Nil {
 		response, err := http.Get(queryString)
