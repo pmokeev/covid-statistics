@@ -1,14 +1,27 @@
 version: "3.3"
 
 services: 
-    web:
-        build: .
+    backend:
+        build:
+          context: .
+          dockerfile: ./docker/Dockerfile_backend
         ports: 
             - 8000:8000
-        environment: 
-            LOCAL: "true"
-            PORT: 8000
     redis:
         image: redis:alpine
         ports:
             - 6379:6379
+    frontend:
+        build:
+          dockerfile: ./docker/Dockerfile_frontend
+          context: .
+        networks:
+          - default
+        ports:
+          - 3000:3000
+        volumes:
+          - '.:/app'
+          - '/app/node_modules'
+        command: npm start
+        tty: true
+        stdin_open: true
