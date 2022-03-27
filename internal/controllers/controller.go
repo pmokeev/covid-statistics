@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/pmokeev/covid-statistic/internal/services"
+	"github.com/pmokeev/covid-statistics/internal/services"
 )
 
 type Controller struct {

@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/go-redis/redis/v8"
-	"github.com/pmokeev/covid-statistic/internal/models"
+	"github.com/pmokeev/covid-statistics/internal/models"
 )
 
 type Service struct {

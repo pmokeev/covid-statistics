@@ -3,7 +3,7 @@ package routers
 import (
 	"net/http"
 
-	"github.com/pmokeev/covid-statistic/internal/controllers"
+	"github.com/pmokeev/covid-statistics/internal/controllers"
 	"github.com/rs/cors"
 
 	"github.com/gorilla/mux"

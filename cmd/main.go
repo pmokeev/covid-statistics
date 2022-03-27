@@ -10,10 +10,10 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/pmokeev/covid-statistic/internal"
-	"github.com/pmokeev/covid-statistic/internal/controllers"
-	"github.com/pmokeev/covid-statistic/internal/routers"
-	"github.com/pmokeev/covid-statistic/internal/services"
+	"github.com/pmokeev/covid-statistics/internal"
+	"github.com/pmokeev/covid-statistics/internal/controllers"
+	"github.com/pmokeev/covid-statistics/internal/routers"
+	"github.com/pmokeev/covid-statistics/internal/services"
 	"github.com/spf13/viper"
 )
 
